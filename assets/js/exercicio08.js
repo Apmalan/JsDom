@@ -1,38 +1,27 @@
 $(function () {
-    $('[data-toggle="tooltip"]').tooltip()
-})
+    $('[data-toggle="tooltip"]').tooltip();
+});
 
-var vendedor = {
-    //nome: document.getElementById('nomeVendedor').value,
-    //salarioBase: document.getElementById('salarioBase').value,
-    // totalVendas: document.getElementById('totalVendas').value,
-    //salariBruto: null,
-    // salarioLiquido: null
+var vendedor = {}; //Objeto inicializado vazio
 
-};
-
-
-
-var encargos = {
+var encargos = {   //Objeto inicializado com propriedades
     inss: null,
     irrf: null
-
 };
 
 function calcularSalarioLiquido() {
     vendedor.nome = document.getElementById('nomeVendedor').value;
     vendedor.salarioBase = parseFloat(document.getElementById('salarioBase').value);
     vendedor.totalVendas = parseFloat(document.getElementById('totalVendas').value);
-    vendedor.salariBruto = calcularSalarioBruto(vendedor.salarioBase, vendedor.totalVendas);
-    console.log(vendedor.calcularSalarioBruto);
+    vendedor.salarioBruto = calcularSalarioBruto(vendedor.salarioBase, vendedor.totalVendas);
+    console.log(vendedor);
+    encargos.inss = calcularInss(vendedor.salarioBruto);
     console.log(encargos);
 }
 
-
 function calcularSalarioBruto(salario, vendas) {
     const PERCENTUAL_COMISSAO = 0.10;
-    return salario + vendas * PERCENTUAL_COMISSAO;
-
+    return salario  + vendas * PERCENTUAL_COMISSAO;
 }
 
 function calcularInss(salario) {
@@ -46,6 +35,4 @@ function calcularInss(salario) {
     } else {
         return salario * 0.11;
     }
-
-
 }
